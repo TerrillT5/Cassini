@@ -9,7 +9,13 @@ import Foundation
 
 struct DemoURL
 {
-    static let stanford = "http://comm.stanford.edu/wp-content/uploads/2013/01/stanford-campus.png"
+//     static let stanford = URL(string: "http://comm.stanford.edu/wp-content/uploads/2013/01/stanford-campus.png")
+    static let stanford = URL(string: "http://stanford.edu/about/images/intro_about.jpg") // iOS won't load an http up by default
+    // go to info.plist 
+    // right click then "add row"
+    // type in "App transport Security settings then "+"
+    // type in "allow Arbitrary loads" & change to YES with a boolean type
+        
 
     static var NASA: Dictionary<String,URL> = {
     let NASAURLStrings = [

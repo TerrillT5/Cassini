@@ -20,12 +20,26 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0G-i1-1vp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="j0G-i1-1vp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MFx-sR-HA0"/>
+                            <constraint firstAttribute="trailing" secondItem="j0G-i1-1vp" secondAttribute="trailing" id="TJv-eu-0Zq"/>
+                            <constraint firstItem="j0G-i1-1vp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Tz9-f8-6nN"/>
+                            <constraint firstItem="j0G-i1-1vp" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="bPt-H2-66y"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="j0G-i1-1vp" id="xa2-Iu-08Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-343" y="-75"/>
+            <point key="canvasLocation" x="-343.19999999999999" y="-75.112443778110944"/>
         </scene>
     </scenes>
 </document>

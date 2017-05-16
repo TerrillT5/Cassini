@@ -10,30 +10,43 @@ import UIKit
 
 class ImageViewController: UIViewController {
 
-    var imageURL: URL? // this is the model that shows the image 
-    {
+    var imageURL: URL? {// this is the model that shows the image
         didSet {
             image = nil // clears out the current image
-            fetchImage()
+            if view.window != nil { // if view is on screen
+            fetchImage() // then the image will be fetched
         }
-        
+     }
+    
     }
     private func fetchImage() // created because the internet of the user may be slow when loading the imageURL
     {
         if let url = imageURL {
             let urlContents = try? Data(contentsOf: url) // if you can't get image then you can try
             if let imageData = urlContents {
-                image = UIImage(data: imageData)
-                
+                image = UIImage(data: imageData) // image from the internet using cellular data
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(imageView) // places the view on the screen
         imageURL = DemoURL.stanford  // sets imageURL
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if image == nil { // the view will appear
+        fetchImage()
+     }
+    }
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet {
+            scrollView.contentSize = imageView.frame.size // encloses the whole image to the view
+            scrollView.addSubview(imageView) // adds the image to scroll view
+            scrollView?.contentSize = imageView.frame.size
+        }
     }
     
     private var imageView = UIImageView() // created the image view in upper left corner
@@ -41,7 +54,7 @@ class ImageViewController: UIViewController {
     private var image: UIImage? {
         
         get {
-            return imageView.image! // returns the optional image of the imageView
+            return imageView.image // returns the image of the imageView
         }
         set {
             imageView.image = newValue // sets the image that the "UIImageView" is showing
