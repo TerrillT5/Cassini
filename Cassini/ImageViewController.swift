@@ -14,10 +14,10 @@ class ImageViewController: UIViewController {
         didSet {
             image = nil // clears out the current image
             if view.window != nil { // if view is on screen
-            fetchImage() // then the image will be fetched
+                fetchImage() // then the image will be fetched
+            }
         }
-     }
-    
+        
     }
     private func fetchImage() // created because the internet of the user may be slow when loading the imageURL
     {
@@ -38,18 +38,24 @@ class ImageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if image == nil { // the view will appear
-        fetchImage()
-     }
-    }
-    @IBOutlet weak var scrollView: UIScrollView!{
-        didSet {
-            scrollView.contentSize = imageView.frame.size // encloses the whole image to the view
-            scrollView.addSubview(imageView) // adds the image to scroll view
-            scrollView?.contentSize = imageView.frame.size
+            fetchImage()
         }
     }
     
-    private var imageView = UIImageView() // created the image view in upper left corner
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet {
+            
+            scrollView.delegate = self
+            scrollView.minimumZoomScale = 0.03
+            scrollView.maximumZoomScale = 1.0
+            scrollView.contentSize = imageView.frame.size // encloses the whole image to the view
+            scrollView.addSubview(imageView) // adds the image to scroll view
+        }
+    }
+    
+     fileprivate var imageView = UIImageView() // created the image view in upper left corner
+     // "fileprivate" allows me to return a imageView in the "viewForZooming" func
+     // everyone will not be able to see the ImageView
     
     private var image: UIImage? {
         
@@ -59,7 +65,18 @@ class ImageViewController: UIViewController {
         set {
             imageView.image = newValue // sets the image that the "UIImageView" is showing
             imageView.sizeToFit() // causes the image frame to be set to fit the screen
-            
+            scrollView?.contentSize = imageView.frame.size // allows the image to scroll with it being an optional
         }
     }
+}
+
+extension ImageViewController : UIScrollViewDelegate {
+    // added extension to allow the imageViewController to conform to the ScrollView 
+    // "UIScrollViewDelegate can be called at the bottom instead of beside "UIViewController" at the top
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
+    
+    
 }
