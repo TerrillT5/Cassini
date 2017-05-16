@@ -12,6 +12,7 @@
 		D7E28FAE1ECA3D64007109F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7E28FAD1ECA3D64007109F5 /* Assets.xcassets */; };
 		D7E28FB11ECA3D64007109F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7E28FAF1ECA3D64007109F5 /* LaunchScreen.storyboard */; };
 		D7E28FBA1ECA3DDC007109F5 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E28FB91ECA3DDC007109F5 /* ImageViewController.swift */; };
+		D7E409AA1ECB3EE8004D2B6A /* DemoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E409A91ECB3EE8004D2B6A /* DemoURL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		D7E28FB01ECA3D64007109F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7E28FB21ECA3D64007109F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7E28FB91ECA3DDC007109F5 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		D7E409A91ECB3EE8004D2B6A /* DemoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoURL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				D7E28FB91ECA3DDC007109F5 /* ImageViewController.swift */,
-				D7E28FB81ECA3D75007109F5 /* Supporting Files */,
 				D7E28FAA1ECA3D64007109F5 /* Main.storyboard */,
+				D7E409A91ECB3EE8004D2B6A /* DemoURL.swift */,
+				D7E28FB81ECA3D75007109F5 /* Supporting Files */,
 				D7E28FB21ECA3D64007109F5 /* Info.plist */,
 			);
 			path = Cassini;
@@ -147,6 +150,7 @@
 			files = (
 				D7E28FBA1ECA3DDC007109F5 /* ImageViewController.swift in Sources */,
 				D7E28FA71ECA3D64007109F5 /* AppDelegate.swift in Sources */,
+				D7E409AA1ECB3EE8004D2B6A /* DemoURL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +314,7 @@
 				D7E28FB71ECA3D64007109F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

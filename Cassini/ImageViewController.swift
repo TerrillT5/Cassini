@@ -10,26 +10,43 @@ import UIKit
 
 class ImageViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    var imageURL: URL? // this is the model that shows the image 
+    {
+        didSet {
+            image = nil // clears out the current image
+            fetchImage()
+        }
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func fetchImage() // created because the internet of the user may be slow when loading the imageURL
+    {
+        if let url = imageURL {
+            let urlContents = try? Data(contentsOf: url) // if you can't get image then you can try
+            if let imageData = urlContents {
+                image = UIImage(data: imageData)
+                
+            }
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(imageView) // places the view on the screen
+        imageURL = DemoURL.stanford  // sets imageURL
+        
     }
-    */
-
+    
+    private var imageView = UIImageView() // created the image view in upper left corner
+    
+    private var image: UIImage? {
+        
+        get {
+            return imageView.image! // returns the optional image of the imageView
+        }
+        set {
+            imageView.image = newValue // sets the image that the "UIImageView" is showing
+            imageView.sizeToFit() // causes the image frame to be set to fit the screen
+            
+        }
+    }
 }
