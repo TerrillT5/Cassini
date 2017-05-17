@@ -8,6 +8,7 @@
 
 import UIKit
 
+// stopped video with 1:17:19 left
 class ImageViewController: UIViewController {
 
     var imageURL: URL? {// this is the model that shows the image
@@ -19,21 +20,30 @@ class ImageViewController: UIViewController {
         }
         
     }
+    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     private func fetchImage() // created because the internet of the user may be slow when loading the imageURL
     {
         if let url = imageURL {
-            let urlContents = try? Data(contentsOf: url) // if you can't get image then you can try
-            if let imageData = urlContents {
-                image = UIImage(data: imageData) // image from the internet using cellular data
+            // the next line of code can throw an error 
+            // it will also block the UI entirely while accessing the network
+            // recommended on doing this in a separate thread
+            
+            // "weak self" inside the closure makes self be an optional of itself
+            spinner.startAnimating() // spinner will start spinning
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let urlContents = try? Data(contentsOf: url) // if you can't get image then you can try
+                
+                if let imageData = urlContents, url == self?.imageURL { // tests the url
+                    DispatchQueue.main.async {
+                        self?.image = UIImage(data: imageData) // image from the internet using cellular data
+                    }
+                }
             }
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        imageURL = DemoURL.stanford  // sets imageURL
-        
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -66,6 +76,7 @@ class ImageViewController: UIViewController {
             imageView.image = newValue // sets the image that the "UIImageView" is showing
             imageView.sizeToFit() // causes the image frame to be set to fit the screen
             scrollView?.contentSize = imageView.frame.size // allows the image to scroll with it being an optional
+            spinner?.stopAnimating() // spinner will stop animating after the image loads
         }
     }
 }
